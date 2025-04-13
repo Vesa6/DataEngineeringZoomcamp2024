@@ -26,25 +26,15 @@ Run docker with the python:3.9 image in an interactive mode and the entrypoint o
 
 What is version of the package wheel ?
 
-0.42.0
+### Answer:
 
-1.0.0
+![image](https://github.com/user-attachments/assets/f2a72cf5-4455-4de2-8a5d-de5c0bbe5481)
 
-23.0.1
-
-58.1.0
-
-Prepare Postgres
-
-Run Postgres and load data as shown in the videos We'll use the green taxi trips from September 2019:
-
-wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz
-
-You will also need the dataset with zones:
-
-wget https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv
-
-Download this data and put it into Postgres (with jupyter notebooks or with a pipeline)
+Commands used to build and run:
+```
+docker build -t test:pandas .
+docker run -it test:pandas
+```
 
 ## Question 3. Count records
 How many taxi trips were totally made on September 18th 2019?
