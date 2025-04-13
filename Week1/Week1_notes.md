@@ -47,4 +47,45 @@ Some useful commands:
 -- Grabs the first 100 rows and puts it in a separate file, basic Linux pipe. Didn't know this works on windows Linux-like CLI too!
 
 head -n 100 yellow_tripdata_2021-01.csv > yellow_head.csv
-```    
+```
+
+```
+print(pd.io.sql.get_schema(df, name='yellow_taxi_data'))
+
+Pandas for data definition language conversion, allows u to check datatypes easily.
+```
+
+```
+Datetime conversion
+
+df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+```
+
+
+```
+while True:
+
+    t_start = time()
+    
+    df = next(df_iter)
+
+    df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
+    df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+
+    df.to_sql(name='yellow_taxi_data', con=engine, if_exists='append')
+
+    t_end = time()
+
+    print('inserted chunk, took %.3f seconds' % (t_end - t_start))
+
+
+-- Load a big chunk of data using iter, benchmarking the time it takes for each chunk (also changes timestamps to better format)
+-- This just exits on exception - Not the cleanest style but w/e.
+```
+
+Tip: Just getting the head can be used to create table (just puts headers in it):
+```
+df.head(n=0).to_sql(name='yellow_taxi_data', con=engine, if_exists='replace') 
+```
+
