@@ -19,3 +19,32 @@ Spark (Containerize deps like Spark, Hadoop, Java... All the fragile stuff)
 Serverless processing (AWS Lambda, Google Functions)
 
 For example, even if you rm rf everything in a Docker container, rebooting it will spin it right back to the beginning.
+
+Dockerfile is basically used for determining what you want the container to do once it starts.
+Ex.
+```
+# Uses python image from Docker Hub as base image
+FROM python:3.9
+
+# Install library inside the container w pip
+RUN pip install pandas
+
+# Switch to this dir
+WORKDIR /app
+
+# Copy local pipeline file into the /app dir inside the container
+COPY pipeline.py pipeline.py
+
+#Define default command to use when container starts
+ENTRYPOINT [ "python", "pipeline.py" ]
+```
+
+## 1.2.2
+
+Some useful commands:
+
+```
+-- Grabs the first 100 rows and puts it in a separate file, basic Linux pipe. Didn't know this works on windows Linux-like CLI too!
+
+head -n 100 yellow_tripdata_2021-01.csv > yellow_head.csv
+```    
